@@ -1,143 +1,158 @@
+/* Title styling */
 html, body {
-    height: 100%; /* ???? ?????? ?????? 100% */
-    margin: 0; /* ????? ?????? ????????? */
-    padding: 0; /* ????? ????? ????????? */
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Tajawal', sans-serif;
+    color: #333;
+    background-color: #f5f5f5;
 }
 
-* {
-    font-family: 'Tajawal', sans-serif; /* ????? ???? ??? ???? ??????? */
-}
 
-.ai-app-background {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    height: 100vh; /* ???? ?? ?? ??????? ???? 100% ?? ?????? */
-    padding: 20px;
-    background: url('https://i.giphy.com/pw2fLKLW3mgw.webp') no-repeat center center fixed;
-    background-size: cover;
-    position: relative; /* ???? ??? ????? ?????? */
-    overflow: hidden; /* ???? ?? ??? ???? ?? ????? ???? */
-}
-
-/* Optional: ????? ????? overlay ???? */
-.overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(31, 31, 31, 0.5); /* ???? ????? */
-    z-index: 1; /* ???? ?? ???? ?? ?????? */
-}
-
-/* ????? ?????? ??????? ??? ?? ????? ???? */
-h2 {
-    color: #fff;
-    margin-bottom: 25px;
-    font-weight: bold;
+.title {
     font-size: 2.5rem;
-    text-shadow: 2px 2px 8px rgba(234, 223, 223, 0.7);
-    letter-spacing: 1px;
     text-align: center;
-    background: linear-gradient(to right, #283c86, #1e2e5c);
+    font-weight: 700;
+    color: #ffffff;
+    padding: 20px 0;
+    margin: 0;
+    position: relative; /* Adjusted from absolute */
+    background: linear-gradient(to right, #56CCF2, #2F80ED);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
-/* Form styles */
+/* Background container styling */
+.ai-app-background {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(rgba(10, 10, 20, 0.8), rgba(10, 10, 20, 0.8)),
+                url('/public/background.png') center/cover fixed no-repeat;
+    color: #f1f1f1;
+    position: relative;
+    overflow: hidden;
+    padding: 20px;
+}
+
+/* Form container */
 .form {
-    /* Remove background and border */
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: none; /* Remove shadow */
-    text-align: right; /* Align text to the right */
+    background: rgba(255, 255, 255, 0.15); /* ?????? ?????? ????? ???????? */
+    padding: 40px 30px;
+    border-radius: 15px;
+    max-width: 450px;
     width: 100%;
-    max-width: 500px; /* Increase max width for larger screens */
-    min-height: 400px; /* Increase min height for taller forms */
-    position: relative; /* Make sure the form is positioned relative to its container */
-    z-index: 2; /* Higher z-index to ensure it appears above the overlay */
+    backdrop-filter: blur(15px); /* ????? ???????? */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); /* ?? ???? */
+    color: #ffffff;
+    margin-top: 30px; /* Ensure there is space between title and form */
 }
 
-/* Adjust form group styles */
+/* Form Group styling */
 .form-group {
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
-/* Styles for labels */
+/* Labels */
 label {
     display: block;
     margin-bottom: 5px;
-    color: #333;
-    font-weight: bold;
+    font-weight: 600;
+    color: #ffffff;
 }
 
-/* Input styles */
+/* Inputs and Textareas */
 input, .select-input, .details-textarea {
     width: 100%;
-    padding: 10px 15px;
-    font-size: 1rem;
+    padding: 12px;
     border-radius: 8px;
-    border: none; /* Remove border */
-    background: rgba(255, 255, 255, 0.9); /* Light background for inputs */
-    transition: all 0.3s;
-    margin-bottom: 10px; /* Space between inputs */
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 
 input:focus, .select-input:focus, .details-textarea:focus {
-    outline: none; /* Remove the outline */
-    box-shadow: 0 0 8px rgba(40, 60, 134, 0.3); /* Focus shadow */
+    border-color: #56CCF2;
+    background-color: rgba(255, 255, 255, 0.2);
+    outline: none;
 }
 
-/* Specific styles for the textarea */
+/* Textarea specific styling */
 .details-textarea {
-    resize: none; /* Prevent resizing */
+    resize: none;
+    height: 120px;
 }
 
-/* Submit button styles */
+/* Button styling */
 .submit-btn {
     width: 100%;
     padding: 15px;
-    background: #283c86;
-    color: #fff;
-    font-size: 1.2rem;
-    border: none; /* Remove border */
     border-radius: 8px;
+    border: none;
+    background-color: #2F80ED;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 1.1rem;
     cursor: pointer;
-    transition: all 0.3s;
-    font-weight: bold;
+    transition: all 0.3s ease;
 }
 
 .submit-btn:hover {
-    background: #1e2e5c;
-    transform: scale(1.05);
+    background-color: #56CCF2;
+    transform: scale(1.03);
 }
 
-/* Response box styles */
+/* Response styling */
 .response-box {
     margin-top: 20px;
-    padding: 15px;
+    padding: 20px;
     border-radius: 8px;
-    font-weight: bold;
-    color: #fff;
+    font-weight: 600;
+    text-align: center;
+    color: #ffffff;
 }
 
 .success {
-    background: #4caf50;
+    background-color: rgba(76, 175, 80, 0.8);
 }
 
 .error {
-    background: #f44336;
+    background-color: rgba(231, 76, 60, 0.8);
 }
 
-/* Responsive styles */
+
+.loading-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Media query for responsive design */
 @media (max-width: 768px) {
     .form {
-        padding: 20px; /* Reduce padding on smaller screens */
-        min-height: 350px; /* Adjust min-height for smaller screens */
+        padding: 20px;
     }
-
-    h2 {
-        font-size: 1.5rem; /* Reduce font size for headings on smaller screens */
+    .title {
+        font-size: 2rem;
     }
 }
