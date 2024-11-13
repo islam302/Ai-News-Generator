@@ -53,14 +53,26 @@ html, body {
 /* Form Group styling */
 .form-group {
     margin-bottom: 15px;
+    color: #ffffff; /* Sets all text within form-group to white */
 }
+
+.form-group input {
+    background-color: transparent; /* Transparent background */
+    color: #ffffff; /* White text for input fields */
+}
+
+.form-group input::placeholder {
+    color: #ffffff; /* White placeholder text */
+    opacity: 0.8; /* Optional: adjust opacity if needed */
+}
+
 
 /* Labels */
 label {
     display: block;
     margin-bottom: 5px;
     font-weight: 600;
-    color: #ffffff;
+    color: #090909;
 }
 
 /* Inputs and Textareas */
@@ -70,7 +82,7 @@ input, .select-input, .details-textarea {
     border-radius: 8px;
     border: 1px solid rgba(255, 255, 255, 0.4);
     background-color: rgba(255, 255, 255, 0.1);
-    color: #ffffff;
+    color: #0c0c0c;
     font-size: 1rem;
     transition: border-color 0.3s ease, background-color 0.3s ease;
 }

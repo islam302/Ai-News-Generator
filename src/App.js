@@ -1,9 +1,51 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useNavigate, useParams } from 'react-router-dom';
 import './App.css';
-import NewsArticle from './NewsArticle';
+import './NewsArticle.css';
 
+// NewsArticle Component to display a single article
+function NewsArticle() {
+    const { id } = useParams();
+    const [article, setArticle] = useState(null);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchArticle = async () => {
+            try {
+                const response = await axios.get(`https://news-llm-generator.onrender.com/llm/news/${id}/`);
+                console.log(response.data);
+                setArticle(response.data);
+            } catch (error) {
+                console.error("Error fetching article:", error.response ? error.response.data : error.message);
+                setError("تعذر تحميل الخبر. يرجى المحاولة لاحقًا.");
+            }
+        };
+
+        fetchArticle();
+    }, [id]);
+
+    if (error) {
+        return <p className="error">{error}</p>;
+    }
+
+    if (!article) {
+        return <p className="loading">جاري تحميل الخبر...</p>;
+    }
+
+    return (
+        <div className="news-article">
+            <div className="header">
+                {article.date && <p className="date">{article.date}</p>}
+            </div>
+            <div className="content">
+                <p className="details">{article.details}</p>
+            </div>
+        </div>
+    );
+}
+
+// MainForm Component to create a new article
 function MainForm() {
     const [newsType, setNewsType] = useState('');
     const [what, setWhat] = useState('');
@@ -13,7 +55,7 @@ function MainForm() {
     const [how, setHow] = useState('');
     const [why, setWhy] = useState('');
     const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(false); // loading state
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -22,38 +64,34 @@ function MainForm() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setError(null);  // Reset any previous error
-        setLoading(true);  // Start loading
+        setError(null);
+        setLoading(true);
 
         try {
-            // Prepare the data to send in the correct format
             const data = {
                 news_type: newsType,
-                what: what,
-                who: who,
-                where: where,
-                when: when,
-                how: how,
-                why: why,
+                place: what,
+                source: who,
+                event: where,
+                date: when,
+                participants: how,
+                event_details: why,
             };
 
-            const result = await axios.post('https://news-llm-generator.onrender.com/llm/create/', data, {
+            const result = await axios.post('https://news-llm-generator.onrender.com', data, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
             });
 
-            // Extract the article ID from the response URL
-            const articleId = result.data.url.split('/')[3]; // Extract the ID from /news/123/
+            const articleId = result.data.id;
+            setLoading(false);
+            navigate(`/news/${articleId}`); // Redirect to the news article page
 
-            setLoading(false);  // Stop loading after getting the response
-
-            // Redirect to the created article page
-            navigate(`/news/${articleId}`);
         } catch (error) {
-            console.error("Error:", error.response ? error.response.data : error.message);
+            console.error("Error details:", error.response ? error.response.data : error.message);
             setError("حدث خطأ، يرجى المحاولة لاحقًا.");
-            setLoading(false);  // Stop loading in case of error
+            setLoading(false);
         }
     };
 
@@ -63,7 +101,6 @@ function MainForm() {
             <h2 className="title">AI NEWS GENERATOR</h2>
             <form onSubmit={handleSubmit} className="form">
                 <div className="form-group">
-                    <label>نوع الخبر</label>
                     <select
                         value={newsType}
                         onChange={(e) => setNewsType(e.target.value)}
@@ -72,72 +109,66 @@ function MainForm() {
                     >
                         <option value="">اختر نوع الخبر</option>
                         <option value="زيارة">زيارة</option>
-                        <option value="حدث">حدث</option>
-                        <option value="خبر عاجل">خبر عاجل</option>
+                        <option value="عقد مؤتمر">عقد مؤتمر</option>
+                        <option value="عقد ورشة عمل">عقد ورشة عمل</option>
+                        <option value="إفتتاح وتدشين">إفتتاح وتدشين</option>
                     </select>
                 </div>
                 <div className="form-group">
-                    <label>ماذا حدث؟</label>
                     <input
                         type="text"
                         value={what}
                         onChange={(e) => setWhat(e.target.value)}
-                        placeholder="وصف الحدث"
-                        required
-                    />
-                </div>
-                <div className="form-group">
-                    <label>من شارك في الحدث؟</label>
-                    <input
-                        type="text"
-                        value={who}
-                        onChange={(e) => setWho(e.target.value)}
-                        placeholder="الشخصيات أو الجهات المشاركة"
-                        required
-                    />
-                </div>
-                <div className="form-group">
-                    <label>أين وقع الحدث؟</label>
-                    <input
-                        type="text"
-                        value={where}
-                        onChange={(e) => setWhere(e.target.value)}
                         placeholder="المكان"
                         required
                     />
                 </div>
                 <div className="form-group">
-                    <label>متى وقع الحدث؟</label>
                     <input
                         type="text"
-                        value={when}
-                        onChange={(e) => setWhen(e.target.value)}
-                        placeholder="الزمان"
+                        value={who}
+                        onChange={(e) => setWho(e.target.value)}
+                        placeholder="المصدر"
                         required
                     />
                 </div>
                 <div className="form-group">
-                    <label>كيف وقع الحدث؟</label>
+                    <input
+                        type="text"
+                        value={where}
+                        onChange={(e) => setWhere(e.target.value)}
+                        placeholder="الحدث"
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <input
+                        type="text"
+                        value={when}
+                        onChange={(e) => setWhen(e.target.value)}
+                        placeholder="اليوم والتاريخ"
+                        required
+                    />
+                </div>
+                <div className="form-group">
                     <input
                         type="text"
                         value={how}
                         onChange={(e) => setHow(e.target.value)}
-                        placeholder="الطريقة - إذا كانت متوفرة"
+                        placeholder="المشاركون"
                     />
                 </div>
                 <div className="form-group">
-                    <label>لماذا وقع الحدث؟</label>
                     <input
                         type="text"
                         value={why}
                         onChange={(e) => setWhy(e.target.value)}
-                        placeholder="السبب أو الخلفية - إذا كانت متوفرة"
+                        placeholder="تفاصيل الحدث المتوفرة"
                     />
                 </div>
                 <button type="submit" className="submit-btn">إنشاء الخبر</button>
             </form>
 
-            {/* Show loading spinner if loading is true */}
             {loading && (
                 <div className="loading-spinner">
                     <div className="spinner"></div>
@@ -154,6 +185,7 @@ function MainForm() {
     );
 }
 
+// App Component to route between MainForm and NewsArticle
 function App() {
     return (
         <Router>
