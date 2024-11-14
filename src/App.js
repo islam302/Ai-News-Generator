@@ -78,7 +78,7 @@ function MainForm() {
                 event_details: why,
             };
 
-            const result = await axios.post('https://news-llm-generator.onrender.com', data, {
+            const result = await axios.post('https://news-llm-generator.onrender.com/llm/create/', data, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
