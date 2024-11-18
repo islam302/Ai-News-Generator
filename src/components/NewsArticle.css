@@ -1,7 +1,7 @@
-/* ????? ?? Tajawal ?? Google Fonts */
+/* Import Tajawal font from Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap');
 
-/* ????????? */
+/* Main article container */
 .news-article {
     max-width: 900px;
     margin: 3rem auto;
@@ -14,11 +14,11 @@
     transition: all 0.3s ease-in-out;
 }
 
-/* ?????? ????? ?????? ?? ??????? */
+/* Article title */
 .news-type {
     font-size: 2.5rem;
     font-weight: 700;
-    color: #2d6a4f; /* ????? ?????? ?????? */
+    color: #2d6a4f;
     margin-bottom: 1rem;
     text-align: center;
     background: linear-gradient(90deg, #4caf50, #2d6a4f);
@@ -32,7 +32,7 @@
     cursor: pointer;
 }
 
-/* ????? ??????? */
+/* Article date */
 .date {
     font-size: 1.1rem;
     color: #777;
@@ -41,7 +41,7 @@
     margin-top: 1rem;
 }
 
-/* ????? ????? ?????? */
+/* Article content */
 .content {
     font-size: 1.3rem;
     color: #333;
@@ -50,7 +50,7 @@
     margin-top: 2rem;
 }
 
-/* ????? ??? ???????? */
+/* Article details */
 .details {
     font-size: 1.2rem;
     color: #555;
@@ -61,7 +61,7 @@
     line-height: 1.8;
 }
 
-/* ????? ????? */
+/* Error message */
 .error {
     color: #e74c3c;
     text-align: center;
@@ -70,26 +70,80 @@
     font-size: 1.2rem;
 }
 
-/* ????? ????? ?????? */
+/* Loading message */
 p.loading {
     color: #95a5a6;
     font-size: 1.1rem;
     text-align: center;
 }
 
-/* ????? ??????? ???????? ??? ??????? */
+/* Hover effect for article container */
 .news-article:hover {
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     transform: translateY(-5px);
 }
 
-/* ????? ??????? ??????? */
-.details {
+/* Editor styles */
+.summernote {
+    margin-top: 2rem;
+    border-radius: 10px;
+    font-family: 'Tajawal', sans-serif;
     font-size: 1.2rem;
-    color: #333;
 }
 
-/* ????? ????? ?? ??????? ??????? */
+/* Save button */
+.save-btn {
+    background-color: #2d6a4f;
+    color: #fff;
+    padding: 0.7rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 1rem;
+    margin-right: 0.5rem;
+    transition: background-color 0.3s ease;
+}
+
+.save-btn:hover {
+    background-color: #4caf50;
+}
+
+/* Edit button */
+.edit-btn {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 0.7rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.edit-btn:hover {
+    background-color: #2d6a4f;
+}
+
+/* Cancel button */
+.cancel-btn {
+    background-color: #e74c3c;
+    color: #fff;
+    padding: 0.7rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.cancel-btn:hover {
+    background-color: #c0392b;
+}
+
+/* Responsive styles */
 @media (max-width: 768px) {
     .news-article {
         padding: 2rem;
@@ -106,4 +160,11 @@ p.loading {
     .details {
         font-size: 1rem;
     }
+}
+
+
+.edit-button{
+    background-color: #e74c3c;
+    color: #fff;
+    padding: 0.7rem 1.5rem;
 }
