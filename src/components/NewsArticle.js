@@ -14,7 +14,7 @@ function NewsArticle() {
     useEffect(() => {
         const fetchArticle = async () => {
             try {
-                const response = await axios.get(`http://127.0.0.1:8000/llm/news/${id}/`);
+                const response = await axios.get(`https://news-llm-generator.onrender.com/llm/news/${id}/`);
                 setArticle(response.data);
                 setEditorContent(response.data.details || '');
             } catch (error) {
@@ -30,7 +30,7 @@ function NewsArticle() {
         try {
             const payload = { details: editorContent }; // Prepare payload
             const response = await axios.put(
-                `http://127.0.0.1:8000/llm/news/${id}/`,
+                `https://news-llm-generator.onrender.com/llm/news/${id}/`,
                 payload,
                 { headers: { 'Content-Type': 'application/json' } } // Set proper headers
             );
