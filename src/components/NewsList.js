@@ -36,9 +36,9 @@ function NewsList() {
       <table className="news-table">
         <thead>
           <tr>
-            <th>#</th>
+            <th>رقم الخبر</th>
             <th>نوع الخبر</th>
-            <th>الإجراءات</th>
+            <th>العرض</th>
           </tr>
         </thead>
         <tbody>

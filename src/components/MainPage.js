@@ -59,6 +59,20 @@ function MainForm() {
         <div className="ai-app-background">
             <div className="overlay"></div>
             <h2 className="title">AI NEWS GENERATOR</h2>
+            <button
+                className="manage-templates-btn"
+                onClick={() => navigate("/manage-templates/")}
+            >
+                Manage Templates
+            </button>
+
+            <button
+                className="news-btn"
+                onClick={() => navigate("/news")}
+            >
+                Generated News
+            </button>
+
             <form onSubmit={handleSubmit} className="form">
                 <div className="form-group">
                     <select
@@ -136,20 +150,6 @@ function MainForm() {
                 </div>
             )}
 
-            <button
-                className="manage-templates-btn"
-                onClick={() => navigate("/manage-templates/")}
-            >
-                Manage Templates
-            </button>
-
-            <button
-                className="news"
-                onClick={() => navigate("/news")}
-            >
-                News
-            </button>
-
             {error && (
                 <div className="response-box">
                     <p className="error">{error}</p>
@@ -165,8 +165,8 @@ function App() {
         <Router>
             <Routes>
                 <Route path="/" element={<MainForm/>}/>
-                <Route path="/news" element={<NewsList />} />
-                <Route path="/news/:id" element={<NewsArticle />} />
+                <Route path="/news" element={<NewsList/>}/>
+                <Route path="/news/:id" element={<NewsArticle/>}/>
                 <Route path="/manage-templates" element={<ManageTemplates />} />
             </Routes>
         </Router>

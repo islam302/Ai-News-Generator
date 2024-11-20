@@ -1,4 +1,4 @@
-/* Title styling */
+/* Global Reset */
 html, body {
     height: 100%;
     margin: 0;
@@ -6,9 +6,14 @@ html, body {
     font-family: 'Tajawal', sans-serif;
     color: #333;
     background-color: #f5f5f5;
+    box-sizing: border-box;
 }
 
+* {
+    box-sizing: inherit;
+}
 
+/* Title styling */
 .title {
     font-size: 2.5rem;
     text-align: center;
@@ -16,7 +21,7 @@ html, body {
     color: #ffffff;
     padding: 20px 0;
     margin: 0;
-    position: relative; /* Adjusted from absolute */
+    position: relative;
     background: linear-gradient(to right, #56CCF2, #2F80ED);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -25,69 +30,51 @@ html, body {
 /* Background container styling */
 .ai-app-background {
     display: flex;
-    flex-direction: column; /* Stack items vertically */
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
     background: linear-gradient(rgba(10, 10, 20, 0.8), rgba(10, 10, 20, 0.8)),
                 url('/public/background.png') center/cover fixed no-repeat;
     color: #f1f1f1;
-    position: relative;
-    overflow: hidden;
     padding: 20px;
 }
 
 /* Form container */
 .form {
-    background: rgba(255, 255, 255, 0.15); /* ?????? ?????? ????? ???????? */
+    background: rgba(255, 255, 255, 0.15);
     padding: 40px 30px;
     border-radius: 15px;
-    max-width: 450px;
     width: 100%;
-    backdrop-filter: blur(15px); /* ????? ???????? */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); /* ?? ???? */
+    max-width: 450px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
     color: #ffffff;
-    margin-top: 30px; /* Ensure there is space between title and form */
+    margin-top: 30px;
 }
 
 /* Form Group styling */
 .form-group {
     margin-bottom: 15px;
-    color: #ffffff; /* Sets all text within form-group to white */
+    color: #ffffff;
 }
 
-.form-group input {
-    background-color: transparent; /* Transparent background */
-    color: #ffffff; /* White text for input fields */
-}
-
-.form-group input::placeholder {
-    color: #ffffff; /* White placeholder text */
-    opacity: 0.8; /* Optional: adjust opacity if needed */
-}
-
-
-/* Labels */
-label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: 600;
-    color: #090909;
-}
-
-/* Inputs and Textareas */
-input, .select-input, .details-textarea {
+.form-group input, .select-input {
     width: 100%;
     padding: 12px;
     border-radius: 8px;
     border: 1px solid rgba(255, 255, 255, 0.4);
     background-color: rgba(255, 255, 255, 0.1);
-    color: #0c0c0c;
+    color: #ffffff;
     font-size: 1rem;
     transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 
-input:focus, .select-input:focus, .details-textarea:focus {
+.form-group input::placeholder {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+input:focus, .select-input:focus {
     border-color: #56CCF2;
     background-color: rgba(255, 255, 255, 0.2);
     outline: none;
@@ -118,25 +105,44 @@ input:focus, .select-input:focus, .details-textarea:focus {
     transform: scale(1.03);
 }
 
-/* Response styling */
-.response-box {
-    margin-top: 20px;
-    padding: 20px;
+/* Action buttons */
+.action-buttons {
+    display: flex;
+    justify-content: center; /* Center buttons horizontally */
+    gap: 20px; /* Add space between buttons */
+    margin: 20px 0; /* Space above and below buttons */
+}
+
+.manage-templates-btn, .news-btn {
+    padding: 10px 15px;
+    background: linear-gradient(90deg, #007bff, #0056b3);
+    border: none;
     border-radius: 8px;
-    font-weight: 600;
-    text-align: center;
     color: #ffffff;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 150px;
+    text-align: center;
+    margin-bottom: 10px;
 }
 
-.success {
-    background-color: rgba(76, 175, 80, 0.8);
+.manage-templates-btn:hover, .news-btn:hover {
+    background: linear-gradient(90deg, #0056b3, #007bff);
+    transform: scale(1.03);
 }
 
-.error {
-    background-color: rgba(231, 76, 60, 0.8);
+/* Adjustments for smaller screens */
+@media (max-width: 768px) {
+    .action-buttons {
+        flex-direction: column; /* Stack buttons vertically */
+        gap: 10px; /* Reduce gap between buttons */
+    }
 }
 
 
+/* Loading Spinner */
 .loading-spinner {
     display: flex;
     justify-content: center;
@@ -159,67 +165,53 @@ input:focus, .select-input:focus, .details-textarea:focus {
     100% { transform: rotate(360deg); }
 }
 
-/* Media query for responsive design */
+/* Response styling */
+.response-box {
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-align: center;
+    color: #ffffff;
+}
+
+.success {
+    background-color: rgba(76, 175, 80, 0.8);
+}
+
+.error {
+    background-color: rgba(231, 76, 60, 0.8);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .title {
+        font-size: 2.2rem;
+    }
+}
+
 @media (max-width: 768px) {
     .form {
         padding: 20px;
+        max-width: 400px;
     }
     .title {
         font-size: 2rem;
     }
+    .action-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
 }
 
-.news-article .ck-editor__editable {
-    min-height: 300px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-}
-.news-article .save-button {
-    margin-top: 10px;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-.news-article .save-button:hover {
-    background-color: #0056b3;
-}
-.manage-templates-btn {
-  position: absolute; /* ???? ???? ?? ???? ???? */
-  top: 16%; /* ????? ??????? ?? ???? */
-  right: 35%; /* ????? ??????? ?? ?????? */
-  padding: 10px 15px;
-  transform: translate(-50%, -50%); /* ????? ?????? ???????? ??????? */
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  z-index: 1000; /* ????? ????? ??? ??????? ?????? */
-}
-
-.manage-templates-btn:hover {
-  background-color: #0056b3;
-}
-
-.news {
-  position: absolute; /* ????? ????? ??????? ??? ?????? */
-  top: 16%; /* ????? ??????? ?? ???? */
-  left: 40%; /* ????? ??????? ?? ?????? */
-  transform: translate(-50%, -50%); /* ????? ?????? ???????? ??????? */
-  padding: 10px 15px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  z-index: 1000; /* ????? ????? ??? ??????? ?????? */
-}
-
-.news:hover {
-  background-color: #0056b3;
+@media (max-width: 480px) {
+    .form {
+        padding: 15px;
+    }
+    .title {
+        font-size: 1.8rem;
+    }
+    .submit-btn {
+        font-size: 1rem;
+    }
 }

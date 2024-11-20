@@ -8,9 +8,17 @@
 }
 
 h1 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #333;
+    font-size: 2.5rem;
+    text-align: center;
+    font-weight: 700;
+    color: #ffffff;
+    padding: 20px 0;
+    margin: 0;
+    position: relative;
+    background: linear-gradient(to right, #2f80ed, #2F80ED);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
 }
 
 .news-table {
