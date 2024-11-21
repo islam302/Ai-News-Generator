@@ -28,16 +28,31 @@ function NewsArticle() {
 
     const handleSave = async () => {
         try {
-            const payload = { details: editorContent }; // Prepare payload
+            const payload = {
+                id: article.id,
+                news_type: article.news_type || "Default News Type",
+                details: editorContent,
+            };
+
+            console.log("Payload being sent:", payload);
+
             const response = await axios.put(
                 `https://news-llm-generator.onrender.com/llm/news/${id}/`,
                 payload,
-                { headers: { 'Content-Type': 'application/json' } } // Set proper headers
+                { headers: { 'Content-Type': 'application/json' } }
             );
-            alert("Article saved successfully!");
+
+            console.log("Response from backend:", response.data);
+            alert("تم حفظ الخبر بنجاح...");
+
         } catch (error) {
-            console.error("Error saving article:", error.response ? error.response.data : error.message);
-            alert("Error saving article. Please try again.");
+            if (error.response) {
+                console.error("Backend error:", error.response.data);
+                alert(`Error saving article: ${error.response.data.message || "Unknown error."}`);
+            } else {
+                console.error("Error saving article:", error.message);
+                alert("Error saving article. Please check your network or backend.");
+            }
         }
     };
 

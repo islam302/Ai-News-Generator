@@ -58,8 +58,17 @@ html, body {
     margin-bottom: 15px;
     color: #ffffff;
 }
-
-.form-group input, .select-input {
+.select-input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #0c0c0c;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+.form-group input {
     width: 100%;
     padding: 12px;
     border-radius: 8px;

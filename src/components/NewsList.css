@@ -27,6 +27,7 @@ h1 {
 }
 
 .news-table th,
+
 .news-table td {
   padding: 12px 15px;
   border: 1px solid #ddd;
@@ -39,6 +40,19 @@ h1 {
 
 .news-table tr:hover {
   background-color: #f9f9f9;
+}
+
+.delete-btn {
+  background-color: #ff0026;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background-color: #d63030;
 }
 
 .view-btn {
