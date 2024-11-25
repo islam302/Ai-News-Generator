@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { Editor } from '@tinymce/tinymce-react';
 import './NewsArticle.css';
 
 function NewsArticle() {
@@ -70,17 +69,26 @@ function NewsArticle() {
                 {article.date && <p className="date">{article.date}</p>}
             </div>
             <div className="content">
-                <CKEditor
-                    editor={ClassicEditor}
-                    data={editorContent}
-                    onChange={(event, editor) => {
-                        const data = editor.getData();
-                        setEditorContent(data);
+                <Editor
+                    apiKey="3aa76efj97gqybphmadxgq9afo814b3rdbn4mp5fa8ueechr" // Replace with your TinyMCE API key if needed
+                    value={editorContent}
+                    onEditorChange={(content) => setEditorContent(content)}
+                    init={{
+                        height: 200,
+                        menubar: false,
+                        plugins: ['link', 'image', 'media', 'textcolor', 'lists'],
+                        toolbar: `
+                            bold italic | 
+                            fontsizeselect forecolor backcolor | 
+                            link image media | 
+                            alignleft aligncenter alignright alignjustify
+                        `,
+                        directionality: 'rtl',
                     }}
                 />
-                <button className="save-button" onClick={handleSave}>
-                    Save
-                </button>
+                    <button className="save-button" onClick={handleSave}>
+                        Save
+                    </button>
             </div>
         </div>
     );
