@@ -189,7 +189,8 @@ input:focus, .select-input:focus {
 }
 
 .error {
-    background-color: rgba(231, 76, 60, 0.8);
+    background-color: rgb(255, 255, 255);
+    color: white;
 }
 
 /* Responsive Design */

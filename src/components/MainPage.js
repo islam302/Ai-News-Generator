@@ -14,6 +14,7 @@ function MainForm() {
     const [when, setWhen] = useState('');
     const [how, setHow] = useState('');
     const [why, setWhy] = useState('');
+    const [creationType, setCreationType] = useState('template_only'); // حقل النوع
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
@@ -27,17 +28,20 @@ function MainForm() {
         setError(null);
         setLoading(true);
 
-        try {
-            const data = {
-                news_type: newsType,
-                place: what,
-                source: who,
-                event: where,
-                date: when,
-                participants: how,
-                event_details: why,
-            };
+        const data = {
+            news_type: newsType,
+            place: what,
+            source: who,
+            event: where,
+            date: when,
+            participants: how,
+            event_details: why,
+            creation_type: creationType,
+        };
 
+        console.log("Data being sent:", data); // عرض البيانات المُرسلة في وحدة التحكم
+
+        try {
             const result = await axios.post('https://news-llm-generator.onrender.com/llm/create/', data, {
                 headers: {
                     'Content-Type': 'application/json',
@@ -50,9 +54,16 @@ function MainForm() {
 
         } catch (error) {
             console.error("Error details:", error.response ? error.response.data : error.message);
-            setError("حدث خطأ، يرجى المحاولة لاحقًا.");
+
+            // استخراج رسالة الخطأ الدقيقة
+            const errorMessage = error.response?.data?.errors?.date?.[0] ||
+                                 error.response?.data?.detail ||
+                                 "حدث خطأ غير متوقع، يرجى المحاولة لاحقًا.";
+
+            setError(errorMessage);
             setLoading(false);
         }
+
     };
 
     return (
@@ -86,6 +97,18 @@ function MainForm() {
                         <option value="عقد مؤتمر">عقد مؤتمر</option>
                         <option value="عقد ورشة عمل">عقد ورشة عمل</option>
                         <option value="إفتتاح وتدشين">إفتتاح وتدشين</option>
+                    </select>
+                </div>
+                <div className="form-group">
+                    <select
+                        value={creationType}
+                        onChange={(e) => setCreationType(e.target.value)}
+                        required
+                        className="select-input"
+                    >
+                        <option value="template_only">استخدام القالب فقط</option>
+                        <option value="openai_only">استخدام OpenAI فقط</option>
+                        <option value="hybrid">دمج القالب و OpenAI</option>
                     </select>
                 </div>
                 <div className="form-group">
@@ -159,7 +182,6 @@ function MainForm() {
     );
 }
 
-// App Component to route between MainForm and NewsArticle
 function App() {
     return (
         <Router>
