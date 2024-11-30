@@ -107,8 +107,8 @@ function MainForm() {
                         className="select-input"
                     >
                         <option value="template_only">استخدام القالب فقط</option>
-                        <option value="openai_only">استخدام OpenAI فقط</option>
-                        <option value="hybrid">دمج القالب و OpenAI</option>
+                        <option value="openai_only">OpenAI استخدام فقط</option>
+                        <option value="hybrid">OpenAIدمج القالب و </option>
                     </select>
                 </div>
                 <div className="form-group">
