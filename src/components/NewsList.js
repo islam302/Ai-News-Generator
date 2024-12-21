@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import "./NewsList.css";
 
-const API_URL = "https://news-llm-generator.onrender.com/llm/news/";
+const API_URL = "http://127.0.0.1:8000/llm/news/";
 
 function NewsList() {
   const [newsList, setNewsList] = useState([]);

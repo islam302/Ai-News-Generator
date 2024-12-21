@@ -13,7 +13,7 @@ function NewsArticle() {
     useEffect(() => {
         const fetchArticle = async () => {
             try {
-                const response = await axios.get(`https://news-llm-generator.onrender.com/llm/news/${id}/`);
+                const response = await axios.get(`http://127.0.0.1:8000/llm/news/${id}/`);
                 setArticle(response.data);
                 setEditorContent(response.data.details || '');
             } catch (error) {
@@ -36,7 +36,7 @@ function NewsArticle() {
             console.log("Payload being sent:", payload);
 
             const response = await axios.put(
-                `https://news-llm-generator.onrender.com/llm/news/${id}/`,
+                `http://127.0.0.1:8000/llm/news/${id}/`,
                 payload,
                 { headers: { 'Content-Type': 'application/json' } }
             );
