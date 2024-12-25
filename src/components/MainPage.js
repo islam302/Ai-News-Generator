@@ -44,7 +44,7 @@ function MainForm() {
         };
 
         try {
-            const result = await axios.post('http://127.0.0.1:8000/llm/create/', data, {
+            const result = await axios.post('https://news-llm-generator.onrender.com/llm/create/', data, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -70,7 +70,7 @@ function MainForm() {
         setError(null);
 
         try {
-            const response = await axios.get(`http://127.0.0.1:8000/llm/manage-templates/${templateId}/`);
+            const response = await axios.get(`https://news-llm-generator.onrender.com/llm/manage-templates/${templateId}/`);
             const templateText = response.data.templates;
 
             // استخراج الحقول الديناميكية من القالب

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import "./ManageTemplates.css";
 
-const API_URL = "http://127.0.0.1:8000/llm/manage-templates/";
+const API_URL = "https://news-llm-generator.onrender.com/llm/manage-templates/";
 
 function ManageTemplates() {
   const [templates, setTemplates] = useState([]);
