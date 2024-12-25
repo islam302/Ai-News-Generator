@@ -112,14 +112,14 @@ function MainForm() {
                 className="manage-templates-btn"
                 onClick={() => navigate("/manage-templates/")}
             >
-                Manage Templates
+                ادارة القوالب
             </button>
 
             <button
                 className="news-btn"
                 onClick={() => navigate("/news")}
             >
-                Generated News
+                الأخبار المحفوظة
             </button>
 
             <form onSubmit={handleSubmit} className="form">
